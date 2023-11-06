@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+  
+  
+  // Estructura para almacenar las notas del estudiante
+  struct nota {
+    int id_materia;
+    float nota;
+  };
+  
+  // Estructura para almacenar los datos del estudiante
+  struct estudiante {
+    char nombre[50];
+    int id;
+    struct nota notas[10];
+  };
+  
+  // Función para leer los datos del estudiante
+  void leer_datos(struct estudiante *estudiante) {
+    printf("Ingrese el nombre del estudiante: ");
+    scanf("%s", estudiante->nombre);
+    printf("Ingrese el ID del estudiante: ");
+    scanf("%d", &estudiante->id);
+    for (int i = 0; i < 10; i++) {
+      printf("Ingrese la nota de la materia %d: ", i + 1);
+      scanf("%f", &estudiante->notas[i].nota);
+      estudiante->notas[i].id_materia = i + 1;
+    }
+  }
+  
+  // Función para consultar las notas del estudiante
+  void consultar_notas(struct estudiante *estudiante) {
+    for (int i = 0; i < 10; i++) {
+      printf("Materia: %d\tNota: %.2f\n", estudiante->notas[i].id_materia,
+             estudiante->notas[i].nota);
+    }
+  }
+  
+  // Función para calcular el promedio de las notas del estudiante
+  float calcular_promedio(struct estudiante *estudiante) {
+    float suma = 0;
+    for (int i = 0; i < 10; i++) {
+      suma += estudiante->notas[i].nota;
+    }
+    return suma / 10;
+  }
+  
+  // Función principal
+  int main() {
+    // Crear una estructura para almacenar los datos del estudiante
+    struct estudiante estudiante;
+  
+    // Leer los datos del estudiante
+    leer_datos(&estudiante);
+  
+    // Consultar las notas del estudiante
+    consultar_notas(&estudiante);
+  
+    // Calcular el promedio de las notas del estudiante
+    float promedio = calcular_promedio(&estudiante);
+    printf("Promedio: %.2f\n", promedio);
+  
+    return 0;
+  }
+  
